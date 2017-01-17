@@ -1,0 +1,110 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<!--form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="{% trans 'Log in' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form-->
+
+<div class="text-center" style="padding:50px 0">
+<div class="centered">
+    <div class="logo">login</div>
+    <span style="display:none;color:red" id="empty_message">Please fill both the fields</span>
+    <span style="display:none;color:red" id="wrong_credentials">Please enter valid credentials</span>
+    <span style="display:none;color:red" id="invalid_email">Please enter a valid email</span>
+    <!-- Main Form -->
+    <div class="login-form-1">
+        <form>{% csrf_token %}
+            <div class="login-form-main-message"></div>
+            <div class="main-login-form">
+                <div class="login-group">
+                    <div class="form-group">
+                        <label for="id_username" class="sr-only">Username</label>
+                        <input type="text" class="form-control input_field" id="id_username" name="username" placeholder="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password" class="sr-only">Password</label>
+                        <input type="password" class="form-control input_field" id="id_password" name="password" placeholder="password" required >
+                    </div>
+                    <!--div class="form-group login-group-checkbox">
+                        <input type="checkbox" id="lg_remember" name="lg_remember">
+                        <label for="lg_remember">remember</label>
+                    </div-->
+                </div><br>
+                <input type="button" class="btn btn-success login_button" value="{% trans 'Log in' %}" />
+                 <!--input type="hidden" name="next" value="{{ next }}" /-->
+            </div>
+            <div class="etc-login-form">
+                <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+            </div>
+        </form>
+    </div>
+    <!-- end:Main Form -->
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.login_button').click(function(){
+        var username = $('#id_username').val();
+        var password = $('#id_password').val();
+        if(username == '' || password == ''){
+            $("#empty_message").show().delay(3000).fadeOut();
+        }else{
+            var params={'username':username,'password':password}
+            $.ajax({
+                type : 'POST',
+                url : '/user_login/',
+                data : params,
+
+                success:function(res){
+                  if(res=='error'){
+                    $("#wrong_credentials").show().delay(3000).fadeOut();
+                  }else{
+                    window.location.href='/'
+                  }
+                }
+
+            }) 
+        }
+       
+    });
+});
+</script>
+<!--p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+<p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p-->
+{% endblock %}
+
+
+{% comment %}
+**registration/login.html**
+
+It's your responsibility to provide the login form in a template called
+registration/login.html by default. This template gets passed four
+template context variables:
+
+``form``
+    A Form object representing the login form. See the forms
+    documentation for more on Form objects.
+
+``next``
+    The URL to redirect to after successful login. This may contain a
+    query string, too.
+
+``site``
+    The current Site, according to the SITE_ID setting. If you don't
+    have the site framework installed, this will be set to an instance
+    of RequestSite, which derives the site name and domain from the
+    current HttpRequest.
+
+``site_name``
+    An alias for site.name. If you don't have the site framework
+    installed, this will be set to the value of
+    request.META['SERVER_NAME']. For more on sites, see The
+    "sites" framework.
+{% endcomment %}

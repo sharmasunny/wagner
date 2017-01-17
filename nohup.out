@@ -1,0 +1,6 @@
+/var/www/Projects/Wagner/wagner-master/wholesale/urls.py:19: RemovedInDjango110Warning: Support for string view arguments to url() is deprecated and will be removed in Django 1.10 (got wholesale.views.home). Pass the callable instead.
+  url(r'^$', 'wholesale.views.home', name='home'),
+
+/var/www/Projects/Wagner/wagner-master/wholesale/urls.py:20: RemovedInDjango110Warning: Support for string view arguments to url() is deprecated and will be removed in Django 1.10 (got wholesale.views.new_releases). Pass the callable instead.
+  url(r'^newreleases/', 'wholesale.views.new_releases', name='new_releases'),
+

@@ -1,0 +1,38 @@
+
+<table id="products_table" class="table display" cellspacing="10px">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        {% if products %}
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product_id }}</td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td><input type="number" id="quantity_{{ product.product_id }}" min="1" value="1"></td>
+                    <td><button class="btn btn-danger my-cart-btn ajax-data-btn" data-id="{{ product.product_id }}" data-name="{{ product.product_name }}" data-summary="summary {{ product.product_id }}" data-price="{{ product.price }}">Add to Cart</button--></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>Sorry No product found</td>
+            </tr>    
+        {% endif %}
+        </tbody>
+    </table>

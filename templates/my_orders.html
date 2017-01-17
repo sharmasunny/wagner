@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<button onclick="goBack()" class="btn btn-info back_button">Back</button>
+	<div class="container my_order_content">
+		<h1 class="order_head">My Orders</h1>
+		{% if orders %}
+
+		<div class="table-responsive">
+			<table id="orders_list_table" class="table display" cellspacing="10px">
+		        <thead>
+		            <tr>
+		                <th>Order_id</th>
+		                <th>Price</th>
+		                <th>Booked On</th>
+		                <th>Action</th>
+		            </tr>
+		        </thead>
+		        <tfoot>
+		            <tr>
+		                <th>order_id</th>
+		                <th>Price</th>
+		                <th>Booked On</th>
+		                <th>Action</th>
+		            </tr>
+		        </tfoot>
+		        <tbody>
+		        {% for order in orders %}
+		            <tr>
+		                <td>{{ order.order_id }}</td>
+		                <td>{{ order.price }}</td>
+		                <td>{{ order.timestamp }}</td>
+		                <td><button class="btn btn-success view_order" data-id="{{ order.order_id }}">View Order</button>
+		                <button class="btn btn-danger delete_order" data-id="{{ order.order_id }}">Delete Order</button>
+		                </td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+		{% else %}
+			<p>Sorry, No orders yet</p>
+		{% endif %}	
+	</div>
+
+{% endblock %}

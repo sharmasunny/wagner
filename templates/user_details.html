@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+	{% if User_Info %}
+		{% for user in User_Info %}
+		<div class="container">
+  			<div class="row">
+  				<div class="col-lg-2">
+  					<button class="btn btn-success editing_button" id="user_info">User Profile</button>
+  					<button class="btn btn-success editing_button" id="edit_password">Change Password</button>
+  				</div>
+  				<span class="error_field empty_error" style="display: none; color: red;"><span id="empty_field">Please fill all the fields first <span class="hide_error">x</span> </span></span>
+  				<div class="col-md-10 user_profile user_info_edit" id="edit_user_profile">
+    					  <span class="error_field empty_error" style="display: none; color: red;"><span id="empty_field">Please fill all the fields first <span class="hide_error">x</span> </span></span>
+    					  <span class="error_field duplicate_email" style="display: none; color: red;"><span id="empty_field">Email already exist<span class="hide_error">x</span> </span></span>
+    					  <span class="error_field duplicate_username" style="display: none; color: red;"><span id="empty_field">Username already exist<span class="hide_error">x</span> </span></span>
+    					  <span class="error_field successfull" style="display: none; color: green;"><span id="empty_field">Your information has been updated successfully<span class="hide_error">x</span> </span></span>
+				            <div id="legend">
+				              <legend class="col-lg-6 col-sm-6">{{ user.firstname }} {{ user.lastname }} </legend>
+				                <div class="col-lg-6 col-sm-6 user_status">
+				                	<div class="col-lg-6 col-sm-6 status_info">
+						              	  {% if user.status == True %}
+						              	  	  Status : <button class="btn btn-info">Active</button>
+						            	  {% else %}
+						            		  Status : <button class="btn-btn-danger">Inactive</button>
+						            	  {% endif %}
+						            </div>
+						            <div class="col-lg-6 col-sm-6 user_edit">
+					            	  	  <button class="btn btn-danger edit_button" id="edit_user_info">Edit User Profile</button>
+					            	</div>
+				            	</div>
+				            </div>
+				          <form class="form-horizontal user_form">
+				            <fieldset>
+				            <div class="control-group">
+				              <label class="control-label" for="username">User Id</label>
+				              <div class="controls">
+				                <input id="user_id" name="user_id" placeholder="" class="form-control input-lg" type="text" value="{{ user.user_id }}" disabled>
+				              </div>
+				            </div>
+				            
+				            <div class="control-group">
+				              <label class="control-label" for="username">Username</label>
+				              <div class="controls">
+				                <input id="username" name="username" placeholder="" class="form-control input-lg" type="text" value="{{ user.username }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="contact_name">Contact Name</label>
+				              <div class="controls">
+				                <input id="contact_name" name="contact_name" placeholder="" class="form-control input-lg" type="text" value="{{ user.contact_name }}" disabled>
+				              </div>
+				            </div>
+				         
+				            <div class="control-group">
+				              <label class="control-label" for="email">E-mail</label>
+				              <div class="controls">
+				                <input id="email" name="email" placeholder="" class="form-control input-lg" type="email" value="{{ user.email }}" disabled>
+				              </div>
+				            <span id="invalid_email" style="display:none;color:red">Please enter a valid email</span>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="business_name">Business Name</label>
+				              <div class="controls">
+				                <input id="business_name" name="business_name" placeholder="" class="form-control input-lg" type="text" value="{{ user.business_name }}" disabled>
+				              </div>
+				            </div>
+
+				    
+				         	<div class="control-group">
+				              <label class="control-label" for="first_name">First Name</label>
+				              <div class="controls">
+				                <input id="first_name" name="first_name" placeholder="" class="form-control input-lg" type="text" value="{{ user.firstname }}" disabled>
+				              </div>
+				            </div>
+				            
+				            <div class="control-group">
+				              <label class="control-label" for="lastname">Last Name</label>
+				              <div class="controls">
+				                <input id="last_name" name="last_name" placeholder="" class="form-control input-lg" type="text" value="{{ user.lastname }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="delivery_instructions">Delivery Instructions</label>
+				              <div class="controls">
+				                <input id="delivery_instructions" name="delivery_instructions" placeholder="" class="form-control input-lg" type="text" value="{{ user.delivery_instructions }}" disabled>
+				              </div>
+				            </div>
+
+				             <div class="control-group">
+				              <label class="control-label" for="phone_number">Phone Number</label>
+				              <div class="controls">
+				                <input id="phone_number" name="phone_number" placeholder="" class="form-control input-lg" type="text" value="{{ user.phone }}" maxlength="10" pattern="[789][0-9]{9}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="fax">Fax</label>
+				              <div class="controls">
+				                <input id="fax" name="fax" placeholder="" class="form-control input-lg" type="text" value="{{ user.fax }}" disabled>
+				              </div>
+				            </div>
+
+				             <div class="control-group">
+				              <label class="control-label" for="address">Address</label>
+				              <div class="controls">
+				                <input id="address" name="address" placeholder="" class="form-control input-lg" type="text" value="{{ user.address }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="town">Town</label>
+				              <div class="controls">
+				                <input id="town" name="town" placeholder="" class="form-control input-lg" type="text" value="{{ user.town }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="post_code">Post Code</label>
+				              <div class="controls">
+				                <input id="post_code" name="post_code" placeholder="" class="form-control input-lg" type="text" value="{{ user.post_code }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="date_joined">Date Joined</label>
+				              <div class="controls">
+				                <input id="date_joined" name="date_joined" placeholder="" class="form-control input-lg" type="text" value="{{ user.date_joined }}" disabled>
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="last_login">Last Login</label>
+				              <div class="controls">
+				                <input id="last_login" name="last_login" placeholder="" class="form-control input-lg" type="text" value="{{ user.last_login }}" disabled>
+				              </div>
+				            </div><br>
+			  
+				            
+				          </fieldset>
+				        </form>
+				        <div class="control-group">
+				             	<button class="btn btn-success" id="save_info_changes" style="display: none;">Save Changes</button>
+				        </div>
+				    
+				    </div> 
+				    <div class="col-md-10 user_password user_info_edit" id="change_user_password" style="display: none;">
+    				<span class="error_field password_updated" style="display: none; color: green;"><span id="empty_field">Your password has been updated successfully<span class="hide_error">x</span> </span></span>
+    				<span class="error_field password_failed" style="display: none; color: red;"><span id="empty_field">Your old password doesn't match<span class="hide_error">x</span> </span></span>
+				        <form class="form-horizontal change_pass_form">
+				          <fieldset>
+				            <div id="legend">
+				              <legend class="col-lg-12 col-sm-12">Change Password </legend>
+				            </div>
+				            <div class="control-group">
+				              <label class="control-label" for="email">Email</label>
+				              <div class="controls">
+				                <input id="user_email" name="user_email" placeholder="" class="form-control input-lg" type="text" value="{{ user.email }}" disabled>
+				              </div>
+				            </div>
+				            
+				            <div class="control-group">
+				              <label class="control-label" for="old_password">Old Password</label>
+				              <div class="controls">
+				                <input id="old_password" name="old_password" placeholder="Enter old password" class="form-control input-lg" type="password">
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="new_password">New Password</label>
+				              <div class="controls">
+				                <input id="new_password" name="new_password" placeholder="Enter new password" class="form-control input-lg" type="password">
+				              </div>
+				            </div>
+
+				            <div class="control-group">
+				              <label class="control-label" for="confirm_password">Confirm Password</label>
+				              <span id="password_mismatch" style="display:none;color:red">Confirm password mismatch</span>
+				              <div class="controls">
+				                <input id="confirm_password" name="confirm_password" placeholder="Enter new password again" class="form-control input-lg" type="password">
+				              </div>
+				            </div><br>
+			  			  </fieldset>
+				        </form>
+		  				<div class="control-group">
+			             	<button class="btn btn-success" id="change_password">Save</button>
+			        	</div>
+
+				            
+				          
+				        <div class="control-group">
+				             	<button class="btn btn-success" id="save_pass_changes" style="display: none;">Save Changes</button>
+				        </div>
+				    
+				    </div>
+				  </div>
+				</div>
+
+		{% endfor %}
+	{% endif %}
+
+
+{% endblock %}

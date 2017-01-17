@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Categories</p>
+                <div class="list-group">
+                {% for category in categories %}
+                    <a  class="list-group-item active category_name" data-id="{{ category.category_id }}">{{ category.category_name }}</a>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-9">
+            	<div class="new">
+                <span id="success_msg" style="display:none;color:green">Your order has been placed successfully</span>
+					  <div class="page-header">
+					    <h1>Products
+					      <div style="cursor: pointer;" class="cart">
+					        <span class="glyphicon glyphicon-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+					      </div>
+					    </h1>
+					  </div>
+
+					<div class="thumbnail table-responsive product_table" >
+					  
+					</div>
+				</div>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+

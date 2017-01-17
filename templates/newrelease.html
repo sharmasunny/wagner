@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<button onclick="goBack()" class="btn btn-info back_button">Back</button>
+    <div class="container my_order_content">
+        <h1 class="order_head">New Releases</h1>
+        {% if new_releases %}
+
+        <div class="table-responsive">
+            <table id="new_release_table" class="table display" cellspacing="10px">
+                <thead>
+                    <tr>
+                        <th>Release_id</th>
+                        <th>Name</th>
+                        <th>description</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Release_id</th>
+                        <th>Name</th>
+                        <th>description</th>
+                        <th>Image</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for item in new_releases %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                        <td><img src="{{ item.image.url }}" class="img-responsive" height="200px" width="200px"/></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>Sorry, No orders yet</p>
+        {% endif %} 
+    </div>
+{% endblock %}

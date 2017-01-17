@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<button onclick="goBack()" class="btn btn-info back_button">Back</button>
+	{% for order in order_info %}
+	<div class="container my_order_content">
+	<h1 class="order_head">Order No: {{ order.order_id }}</h1>
+			<p class="total_price">Total Price: $ {{ order.price }}</p>
+		<div class="table-responsive">
+			<table id="orders_info_table" class="table display" cellspacing="10px">
+		        <thead>
+		            <tr>
+		                <th>Product_id</th>
+		                <th>Name</th>
+		                <th>Price</th>
+		                <th>Quantity</th>
+		            </tr>
+		        </thead>
+		        <tfoot>
+		            <tr>
+		                <th>Product_id</th>
+		                <th>Name</th>
+		                <th>Price</th>
+		                <th>Quantity</th>
+		            </tr>
+		        </tfoot>
+		        <tbody>
+		        {% for ord in order.order_list %}
+		            <tr>
+		                <td>{{ ord.id }}</td>
+		                <td>{{ ord.name }}</td>
+		                <td>$ {{ ord.price }}</td>
+		                <td>{{ ord.quantity }}</td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+	</div>	
+	{% endfor %}
+{% endblock %}
